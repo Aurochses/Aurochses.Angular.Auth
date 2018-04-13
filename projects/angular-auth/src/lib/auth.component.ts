@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'lib-angular-auth',
+  selector: 'aur-auth',
   template: `
     <p>
       angular-auth works!
@@ -9,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
   `,
   styles: []
 })
-export class AngularAuthComponent implements OnInit {
+export class AuthComponent implements OnInit {
 
   constructor() { }
 

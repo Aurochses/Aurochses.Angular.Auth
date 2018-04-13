@@ -2,4 +2,5 @@
  * Public API Surface of angular-auth
  */
 
-export * from './lib/auth.module';
+export * from './lib/models/authentication-settings.model';
+export * from './lib/authentication.module';

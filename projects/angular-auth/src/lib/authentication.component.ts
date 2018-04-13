@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 
 import { EnvironmentService } from './services/environment.service';
+import { AuthenticationService } from './services/authentication.service';
 
 @Component({
   selector: 'aur-auth',
@@ -11,8 +12,8 @@ import { EnvironmentService } from './services/environment.service';
   `,
   styles: []
 })
-export class AuthComponent {
+export class AuthenticationComponent {
 
-  constructor(environmentService: EnvironmentService) { }
+  constructor(environmentService: EnvironmentService, authenticationService: AuthenticationService) { }
 
 }

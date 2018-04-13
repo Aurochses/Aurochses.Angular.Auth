@@ -1,10 +1,16 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { RouterModule, Routes } from '@angular/router';
 
 import { environment } from '../environments/environment';
+import { authenticationSettings } from '../environments/authentication-settings';
 import { AppComponent } from './app.component';
 
-import { AuthModule } from '@aurochses/angular-auth';
+import { AuthenticationModule } from '@aurochses/angular-auth';
+
+const routes: Routes = [
+  { path: '', component: AppComponent }
+];
 
 @NgModule({
   declarations: [
@@ -12,7 +18,8 @@ import { AuthModule } from '@aurochses/angular-auth';
   ],
   imports: [
     BrowserModule,
-    AuthModule.forRoot(environment)
+    RouterModule.forRoot(routes),
+    AuthenticationModule.forRoot(environment, authenticationSettings)
   ],
   providers: [],
   bootstrap: [AppComponent]

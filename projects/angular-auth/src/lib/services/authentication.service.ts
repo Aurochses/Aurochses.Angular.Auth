@@ -3,11 +3,12 @@ import { Location } from '@angular/common';
 import { Router } from '@angular/router';
 
 import { UserManager, User } from 'oidc-client';
-import { Observable } from 'rxjs';
+import { Observable, from } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 import { EnvironmentService } from './environment.service';
 import { AuthenticationSettings } from '../models/authentication-settings.model';
-import { AuthUser } from './models/user.model';
+import { UserModel } from '../models/user.model';
 
 
 @Injectable()
@@ -44,7 +45,7 @@ export class AuthenticationService {
     });
 
     this.userManager.events.addUserLoaded(x => {
-      console.log('addUserLoaded')
+      console.log('addUserLoaded');
     });
 
     this.userManager.events.addUserUnloaded(x => {
@@ -72,30 +73,40 @@ export class AuthenticationService {
   }
 
   isUserInRole(roles: Array<string>): Observable<boolean> {
-    return this.getUser().map((user: AuthUser) => {
-      let flag = true;
-      roles.forEach(element => {
-        if (!(user.profile.permission.indexOf(element) > -1)) {
-          flag = false;
-        }
-      });
+    return this.getUser().pipe(
+      map(
+        (user: UserModel) => {
+          let flag = true;
+          roles.forEach(element => {
+            if (!(user.profile.permission.indexOf(element) > -1)) {
+              flag = false;
+            }
+          });
 
-      return flag;
-    });
+          return flag;
+        }
+      )
+    );
   }
 
   isLoggedIn(): Observable<boolean> {
-    return this.getUser().map((user: AuthUser) => {
-      if (user) {
-        return true;
-      } else {
-        return false;
-      }
-    });
+    return this.getUser().pipe(
+      map(
+        (user: UserModel) => {
+          if (user) {
+            return true;
+          } else {
+            return false;
+          }
+        }
+      )
+    );
   }
 
-  getUser(): Observable<AuthUser> {
-    return Observable.fromPromise(this.userManager.getUser()).map(user => { return user as AuthUser });
+  getUser(): Observable<UserModel> {
+    return from(this.userManager.getUser()).pipe(
+      map(user => user as UserModel)
+    );
   }
 
   private removeUser() {

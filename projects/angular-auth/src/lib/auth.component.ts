@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+
+import { EnvironmentService } from './services/environment.service';
 
 @Component({
   selector: 'aur-auth',
@@ -9,11 +11,8 @@ import { Component, OnInit } from '@angular/core';
   `,
   styles: []
 })
-export class AuthComponent implements OnInit {
+export class AuthComponent {
 
-  constructor() { }
-
-  ngOnInit() {
-  }
+  constructor(environmentService: EnvironmentService) { }
 
 }

@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
+import { environment } from '../environments/environment';
 import { AppComponent } from './app.component';
 
 import { AuthModule } from '@aurochses/angular-auth';
@@ -11,7 +12,7 @@ import { AuthModule } from '@aurochses/angular-auth';
   ],
   imports: [
     BrowserModule,
-    AuthModule
+    AuthModule.forRoot(environment)
   ],
   providers: [],
   bootstrap: [AppComponent]

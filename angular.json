@@ -133,6 +133,44 @@
           }
         }
       }
+    },
+    "angular-auth": {
+      "root": "projects/angular-auth",
+      "projectType": "library",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "project": "projects/angular-auth/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "project": "projects/angular-auth/ng-package.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/angular-auth/src/test.ts",
+            "tsConfig": "projects/angular-auth/tsconfig.spec.json",
+            "karmaConfig": "projects/angular-auth/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/angular-auth/tsconfig.lint.json",
+              "projects/angular-auth/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   }
 }

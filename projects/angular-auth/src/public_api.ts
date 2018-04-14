@@ -3,4 +3,5 @@
  */
 
 export * from './lib/models/authentication-settings.model';
+export * from './lib/authentication.guard';
 export * from './lib/authentication.module';

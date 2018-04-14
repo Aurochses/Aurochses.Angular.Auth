@@ -6,10 +6,16 @@ import { environment } from '../environments/environment';
 import { authenticationSettings } from '../environments/authentication-settings';
 import { AppComponent } from './app.component';
 
-import { AuthenticationModule } from '@aurochses/angular-auth';
+import { AuthenticationModule, AuthenticationGuard } from '@aurochses/angular-auth';
 
 const routes: Routes = [
-  { path: '', component: AppComponent }
+  {
+    path: '',
+    component: AppComponent,
+    canActivate: [
+      AuthenticationGuard
+    ]
+  }
 ];
 
 @NgModule({
@@ -21,7 +27,9 @@ const routes: Routes = [
     RouterModule.forRoot(routes),
     AuthenticationModule.forRoot(environment, authenticationSettings)
   ],
-  providers: [],
+  providers: [
+    AuthenticationGuard
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

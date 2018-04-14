@@ -41,6 +41,7 @@ export class AuthenticationService {
       if (environmentService.IsDevelopment()) {
         console.error(`Silent renew ${error.stack}`);
       }
+
       this.removeUser();
     });
 

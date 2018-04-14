@@ -19,13 +19,13 @@ export class AuthenticationService {
     private router: Router,
     location: Location,
     environmentService: EnvironmentService,
-    authSettings: AuthenticationSettings
+    authenticationSettings: AuthenticationSettings
   ) {
-    this.userManager = new UserManager(authSettings);
+    this.userManager = new UserManager(authenticationSettings);
 
     this.userManager.events.addAccessTokenExpired(_ => {
       if (environmentService.IsDevelopment()) {
-        console.debug('Token expired!!!');
+        console.log('Token expired!!!');
       }
 
       this.removeUser();
@@ -33,7 +33,7 @@ export class AuthenticationService {
 
     this.userManager.events.addAccessTokenExpiring(_ => {
       if (environmentService.IsDevelopment()) {
-        console.debug('Token expiring!!!');
+        console.log('Token expiring!!!');
       }
     });
 
@@ -46,12 +46,17 @@ export class AuthenticationService {
     });
 
     this.userManager.events.addUserLoaded(x => {
-      console.log('addUserLoaded');
+      if (environmentService.IsDevelopment()) {
+        console.log('addUserLoaded');
+      }
     });
 
     this.userManager.events.addUserUnloaded(x => {
       this.signInRedirect(location.path());
-      console.log('addUserUnloaded');
+
+      if (environmentService.IsDevelopment()) {
+        console.log('addUserUnloaded');
+      }
     });
   }
 

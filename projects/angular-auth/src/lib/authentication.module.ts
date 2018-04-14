@@ -5,15 +5,18 @@ import { AuthenticationSettings } from './models/authentication-settings.model';
 import { EnvironmentService } from './services/environment.service';
 import { AuthenticationService } from './services/authentication.service';
 import { AuthenticationComponent } from './authentication.component';
+import { RenewComponent } from './renew.component';
 
 @NgModule({
   imports: [
   ],
   declarations: [
-    AuthenticationComponent
+    AuthenticationComponent,
+    RenewComponent
   ],
   exports: [
-    AuthenticationComponent
+    AuthenticationComponent,
+    RenewComponent
   ],
   providers: [
     EnvironmentService,

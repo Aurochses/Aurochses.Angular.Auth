@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
+import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 
 import { User } from 'oidc-client';
 import { Observable } from 'rxjs';
@@ -13,8 +13,7 @@ export class AuthenticationGuard implements CanActivate {
 
     constructor(
         private environmentService: EnvironmentService,
-        private authenticationService: AuthenticationService,
-        private router: Router
+        private authenticationService: AuthenticationService
     ) { }
 
     canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
@@ -23,13 +22,13 @@ export class AuthenticationGuard implements CanActivate {
                 (isLoggedIn: boolean) => {
                     if (isLoggedIn) {
                         if (this.environmentService.IsDevelopment()) {
-                            console.debug(`Guard App: User already retrieved. Continuing to ${state.url}.`);
+                            console.log(`Guard App: User already retrieved. Continuing to ${state.url}.`);
                         }
 
                         return true;
                     } else {
                         if (this.environmentService.IsDevelopment()) {
-                            console.debug(`Guard App: User not logged. Redirecting to /login (and then to ${state.url}).`);
+                            console.log(`Guard App: User not logged. Redirecting to /login (and then to ${state.url}).`);
                         }
 
                         this.authenticationService.signInRedirect(state.url);

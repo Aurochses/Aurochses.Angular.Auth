@@ -1,4 +1,5 @@
 import { User } from 'oidc-client';
+
 import { UserProfileModel } from './user-profile.model';
 
 export class UserModel implements User {

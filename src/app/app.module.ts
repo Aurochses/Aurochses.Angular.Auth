@@ -17,7 +17,10 @@ const routes: Routes = [
     canActivate: [
       AuthenticationGuard,
       AuthorizationGuard
-    ]
+    ],
+    data: {
+      permissions: [ 'fakePermission' ]
+    }
   },
   {
     path: 'auth',

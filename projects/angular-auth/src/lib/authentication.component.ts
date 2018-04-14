@@ -1,19 +1,17 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { EnvironmentService } from './services/environment.service';
 import { AuthenticationService } from './services/authentication.service';
 
 @Component({
-  selector: 'aur-auth',
-  template: `
-    <p>
-      angular-auth works!
-    </p>
-  `,
-  styles: []
+  template: ''
 })
-export class AuthenticationComponent {
+export class AuthenticationComponent implements OnInit {
 
-  constructor(environmentService: EnvironmentService, authenticationService: AuthenticationService) { }
+  constructor(private authenticationService: AuthenticationService) { }
+
+  ngOnInit() {
+    this.authenticationService.signinRedirectCallback();
+  }
 
 }

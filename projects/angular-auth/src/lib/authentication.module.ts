@@ -4,6 +4,7 @@ import { EnvironmentConfig } from './models/environment-config.model';
 import { AuthenticationSettings } from './models/authentication-settings.model';
 import { EnvironmentService } from './services/environment.service';
 import { AuthenticationService } from './services/authentication.service';
+import { AuthorizationService } from './services/authorization.service';
 import { AuthenticationComponent } from './authentication.component';
 import { RenewComponent } from './renew.component';
 
@@ -20,7 +21,8 @@ import { RenewComponent } from './renew.component';
   ],
   providers: [
     EnvironmentService,
-    AuthenticationService
+    AuthenticationService,
+    AuthorizationService
   ]
 })
 export class AuthenticationModule {

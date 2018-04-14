@@ -78,23 +78,6 @@ export class AuthenticationService {
     this.userManager.signinSilentCallback();
   }
 
-  isUserInRole(roles: Array<string>): Observable<boolean> {
-    return this.getUser().pipe(
-      map(
-        (user: UserModel) => {
-          let flag = true;
-          roles.forEach(element => {
-            if (!(user.profile.permission.indexOf(element) > -1)) {
-              flag = false;
-            }
-          });
-
-          return flag;
-        }
-      )
-    );
-  }
-
   isLoggedIn(): Observable<boolean> {
     return this.getUser().pipe(
       map(

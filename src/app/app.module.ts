@@ -5,7 +5,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { environment } from '../environments/environment';
 import { authenticationSettings } from '../environments/authentication-settings';
 
-import { AuthenticationModule, AuthenticationGuard, AuthenticationComponent } from '@aurochses/angular-auth';
+import { AuthenticationModule, AuthenticationGuard, AuthorizationGuard, AuthenticationComponent, RenewComponent } from '@aurochses/angular-auth';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
@@ -15,12 +15,17 @@ const routes: Routes = [
     path: '',
     component: HomeComponent,
     canActivate: [
-      AuthenticationGuard
+      AuthenticationGuard,
+      AuthorizationGuard
     ]
   },
   {
     path: 'auth',
     component: AuthenticationComponent
+  },
+  {
+    path: 'renew',
+    component: RenewComponent
   }
 ];
 
@@ -35,7 +40,8 @@ const routes: Routes = [
     AuthenticationModule.forRoot(environment, authenticationSettings)
   ],
   providers: [
-    AuthenticationGuard
+    AuthenticationGuard,
+    AuthorizationGuard
   ],
   bootstrap: [AppComponent]
 })

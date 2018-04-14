@@ -4,23 +4,30 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { environment } from '../environments/environment';
 import { authenticationSettings } from '../environments/authentication-settings';
-import { AppComponent } from './app.component';
 
-import { AuthenticationModule, AuthenticationGuard } from '@aurochses/angular-auth';
+import { AuthenticationModule, AuthenticationGuard, AuthenticationComponent } from '@aurochses/angular-auth';
+
+import { AppComponent } from './app.component';
+import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: AppComponent,
+    component: HomeComponent,
     canActivate: [
       AuthenticationGuard
     ]
+  },
+  {
+    path: 'auth',
+    component: AuthenticationComponent
   }
 ];
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,

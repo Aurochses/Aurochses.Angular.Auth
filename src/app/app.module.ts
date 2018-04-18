@@ -5,7 +5,13 @@ import { RouterModule, Routes } from '@angular/router';
 import { environment } from '../environments/environment';
 import { authenticationSettings } from '../environments/authentication-settings';
 
-import { AuthenticationModule, AuthenticationGuard, AuthorizationGuard, AuthenticationComponent, RenewComponent } from '@aurochses/angular-auth';
+import {
+  AuthenticationModule,
+  AuthenticationGuard,
+  AuthorizationGuard,
+  AuthenticationComponent,
+  RenewComponent
+} from '@aurochses/angular-auth';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';

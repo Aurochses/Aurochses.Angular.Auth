@@ -26,7 +26,7 @@ const routes: Routes = [
       AuthorizationGuard
     ],
     data: {
-      permissions: [ 'fakePermission' ]
+
     }
   },
   {

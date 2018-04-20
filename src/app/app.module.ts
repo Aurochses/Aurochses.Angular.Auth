@@ -3,7 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule, Routes } from '@angular/router';
 
 import { environment } from '../environments/environment';
-import { authenticationSettings } from '../environments/authentication-settings';
 
 import {
   AuthenticationModule,
@@ -12,6 +11,7 @@ import {
   AuthenticationComponent,
   RenewComponent
 } from '@aurochses/angular-auth';
+import { authenticationSettings } from '../environments/authentication-settings';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';

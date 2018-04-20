@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { AuthenticationService } from '@aurochses/angular-auth';
-import { UserProfileModel } from '@aurochses/angular-auth';
+import { AuthenticationService, UserProfileModel } from '@aurochses/angular-auth';
 
 @Component({
   selector: 'home',

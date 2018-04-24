@@ -1,54 +1,21 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { RouterModule, Routes } from '@angular/router';
+import { RouterModule } from '@angular/router';
 
 import { environment } from '../environments/environment';
 
 import {
   AuthenticationModule,
   AuthenticationGuard,
-  AuthorizationGuard,
-  AuthenticationComponent,
-  RenewComponent
+  AuthorizationGuard
 } from '@aurochses/angular-auth';
 import { authenticationSettings } from '../environments/authentication-settings';
 
+import { AppRoutesModule } from './app-routes.module';
 import { AppComponent } from './app.component';
+
 import { HomeComponent } from './home/home.component';
 import { OtherComponent } from './other/other.component';
-
-const routes: Routes = [
-  {
-    path: '',
-    component: HomeComponent,
-    canActivate: [
-      AuthenticationGuard,
-      AuthorizationGuard
-    ],
-    data: {
-
-    }
-  },
-  {
-    path: 'other',
-    component: OtherComponent,
-    canActivate: [
-      AuthenticationGuard,
-      AuthorizationGuard
-    ],
-    data: {
-      permissions: [ 'fakePermission' ]
-    }
-  },
-  {
-    path: 'auth',
-    component: AuthenticationComponent
-  },
-  {
-    path: 'renew',
-    component: RenewComponent
-  }
-];
 
 @NgModule({
   declarations: [
@@ -58,7 +25,8 @@ const routes: Routes = [
   ],
   imports: [
     BrowserModule,
-    RouterModule.forRoot(routes),
+    RouterModule,
+    AppRoutesModule,
     AuthenticationModule.forRoot(environment, authenticationSettings)
   ],
   providers: [

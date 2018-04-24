@@ -6,6 +6,7 @@ import { environment } from '../environments/environment';
 
 import {
   AuthenticationModule,
+  AuthenticationService,
   AuthenticationGuard,
   AuthorizationGuard
 } from '@aurochses/angular-auth';
@@ -30,6 +31,7 @@ import { OtherComponent } from './other/other.component';
     AuthenticationModule.forRoot(environment, authenticationSettings)
   ],
   providers: [
+    AuthenticationService,
     AuthenticationGuard,
     AuthorizationGuard
   ],

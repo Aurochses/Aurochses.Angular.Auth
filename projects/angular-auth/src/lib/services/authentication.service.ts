@@ -6,7 +6,7 @@ import { UserManager, User } from 'oidc-client';
 import { Observable, from } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { EnvironmentService } from './environment.service';
+import { Environment } from '../models/environment.model';
 import { AuthenticationSettings } from '../models/authentication-settings.model';
 import { UserModel } from '../models/user.model';
 
@@ -18,13 +18,13 @@ export class AuthenticationService {
   constructor(
     private router: Router,
     location: Location,
-    environmentService: EnvironmentService,
+    environment: Environment,
     authenticationSettings: AuthenticationSettings
   ) {
     this.userManager = new UserManager(authenticationSettings);
 
     this.userManager.events.addAccessTokenExpired(_ => {
-      if (environmentService.IsDevelopment()) {
+      if (environment.production === false) {
         console.log('Token expired!!!');
       }
 
@@ -32,13 +32,13 @@ export class AuthenticationService {
     });
 
     this.userManager.events.addAccessTokenExpiring(_ => {
-      if (environmentService.IsDevelopment()) {
+      if (environment.production === false) {
         console.log('Token expiring!!!');
       }
     });
 
     this.userManager.events.addSilentRenewError((error: Error) => {
-      if (environmentService.IsDevelopment()) {
+      if (environment.production === false) {
         console.error(`Silent renew ${error.stack}`);
       }
 
@@ -46,7 +46,7 @@ export class AuthenticationService {
     });
 
     this.userManager.events.addUserLoaded(x => {
-      if (environmentService.IsDevelopment()) {
+      if (environment.production === false) {
         console.log('addUserLoaded');
       }
     });
@@ -54,7 +54,7 @@ export class AuthenticationService {
     this.userManager.events.addUserUnloaded(x => {
       this.signInRedirect(location.path());
 
-      if (environmentService.IsDevelopment()) {
+      if (environment.production === false) {
         console.log('addUserUnloaded');
       }
     });

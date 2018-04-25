@@ -1,8 +1,7 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 
-import { EnvironmentConfig } from './models/environment-config.model';
+import { Environment } from './models/environment.model';
 import { AuthenticationSettings } from './models/authentication-settings.model';
-import { EnvironmentService } from './services/environment.service';
 import { AuthenticationService } from './services/authentication.service';
 import { AuthorizationService } from './services/authorization.service';
 import { AuthenticationComponent } from './authentication.component';
@@ -18,17 +17,16 @@ import { RenewComponent } from './renew.component';
     RenewComponent
   ],
   providers: [
-    EnvironmentService,
     AuthenticationService,
     AuthorizationService
   ]
 })
 export class AuthenticationModule {
-  static forRoot(environment: EnvironmentConfig, authenticationSettings: AuthenticationSettings): ModuleWithProviders {
+  static forRoot(environment: Environment, authenticationSettings: AuthenticationSettings): ModuleWithProviders {
     return {
       ngModule: AuthenticationModule,
       providers: [
-        { provide: EnvironmentConfig, useValue: environment },
+        { provide: Environment, useValue: environment },
         { provide: AuthenticationSettings, useValue: authenticationSettings}
       ]
     };

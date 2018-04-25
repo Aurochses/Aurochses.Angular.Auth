@@ -9,8 +9,6 @@ import { AuthenticationComponent } from './authentication.component';
 import { RenewComponent } from './renew.component';
 
 @NgModule({
-  imports: [
-  ],
   declarations: [
     AuthenticationComponent,
     RenewComponent

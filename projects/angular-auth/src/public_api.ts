@@ -6,6 +6,7 @@ export * from './lib/models/authentication-settings.model';
 export * from './lib/models/user.model';
 export * from './lib/models/user-profile.model';
 export * from './lib/services/authentication.service';
+export * from './lib/services/authorization.service';
 export * from './lib/authentication.guard';
 export * from './lib/authorization.guard';
 export * from './lib/authentication.component';

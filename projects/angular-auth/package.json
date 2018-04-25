@@ -1,12 +1,12 @@
 {
   "name": "@aurochses/angular-auth",
-  "version": "1.0.0-alpha.1",
+  "version": "1.0.0-rc.1",
   "author": "Aurochses",
   "peerDependencies": {
     "@angular/common": "^6.0.0-rc.0 || ^6.0.0",
     "@angular/core": "^6.0.0-rc.0 || ^6.0.0",
     "@angular/router": "^6.0.0-rc.1",
     "oidc-client": "1.4.1",
-    "rxjs": "^6.0.0-rc.0"
+    "rxjs": "6.0.0"
   }
 }

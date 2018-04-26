@@ -5,30 +5,32 @@ import { User } from 'oidc-client';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { Environment } from './models/environment.model';
-import { AuthenticationService } from './services/authentication.service';
+import { Environment } from '../models/environment.model';
+import { AuthenticationSettings } from '../models/authentication-settings.model';
+import { AuthenticationService } from '../services/authentication.service';
 
 @Injectable()
 export class AuthenticationGuard implements CanActivate {
 
     constructor(
         private environment: Environment,
+        private authenticationSettings: AuthenticationSettings,
         private authenticationService: AuthenticationService
     ) { }
 
     canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-        return this.authenticationService.isLoggedIn().pipe(
+        return this.authenticationService.isLoggedInObservable().pipe(
             map(
                 (isLoggedIn: boolean) => {
                     if (isLoggedIn) {
-                        if (this.environment.production === false) {
-                            console.log(`Guard App: User already retrieved. Continuing to ${state.url}.`);
+                        if (!this.environment.production) {
+                            console.log(`AuthenticationGuard: User already retrieved. Continuing to ${state.url}.`);
                         }
 
                         return true;
                     } else {
-                        if (this.environment.production === false) {
-                            console.log(`Guard App: User not logged. Redirecting to /login (and then to ${state.url}).`);
+                        if (!this.environment.production) {
+                            console.log(`AuthenticationGuard: User is not logged in. Redirecting to Login (and then to ${state.url}).`);
                         }
 
                         this.authenticationService.signInRedirect(state.url);
@@ -39,4 +41,5 @@ export class AuthenticationGuard implements CanActivate {
             )
         );
     }
+
 }

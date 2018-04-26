@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import { Location } from '@angular/common';
 import { Router } from '@angular/router';
 
-import { UserManager, User } from 'oidc-client';
+import { UserManager } from 'oidc-client';
 import { Observable, from } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -13,93 +13,221 @@ import { UserModel } from '../models/user.model';
 
 @Injectable()
 export class AuthenticationService {
-  public userManager: UserManager;
+  userManager: UserManager;
+  userLoadededEvent: EventEmitter<UserModel> = new EventEmitter<UserModel>();
+  currentUser: UserModel;
+  isLoggedIn = false;
 
   constructor(
     private router: Router,
     location: Location,
-    environment: Environment,
+    private environment: Environment,
     authenticationSettings: AuthenticationSettings
   ) {
     this.userManager = new UserManager(authenticationSettings);
 
-    this.userManager.events.addAccessTokenExpired(_ => {
-      if (environment.production === false) {
-        console.log('Token expired!!!');
+    this.userManager.events.addUserLoaded(
+      (user: UserModel) => {
+        this.currentUser = user;
+        this.isLoggedIn = !(user === undefined);
+
+        if (!environment.production) {
+          console.log('AuthenticationService: User Loaded.');
+        }
       }
+    );
 
-      this.removeUser();
-    });
+    this.userManager.events.addUserUnloaded(
+      () => {
+        if (!environment.production) {
+          console.log('AuthenticationService: User Unloaded.');
+        }
 
-    this.userManager.events.addAccessTokenExpiring(_ => {
-      if (environment.production === false) {
-        console.log('Token expiring!!!');
+        this.isLoggedIn = false;
+
+        this.signInRedirect(location.path());
       }
-    });
+    );
 
-    this.userManager.events.addSilentRenewError((error: Error) => {
-      if (environment.production === false) {
-        console.error(`Silent renew ${error.stack}`);
+    this.userManager.events.addAccessTokenExpiring(
+      () => {
+        if (!environment.production) {
+          console.log('AuthenticationService: Access Token Expiring.');
+        }
       }
+    );
 
-      this.removeUser();
-    });
+    this.userManager.events.addAccessTokenExpired(
+      () => {
+        if (!environment.production) {
+          console.log('AuthenticationService: Access Token Expired.');
+        }
 
-    this.userManager.events.addUserLoaded(x => {
-      if (environment.production === false) {
-        console.log('addUserLoaded');
+        this.removeUser();
       }
-    });
+    );
 
-    this.userManager.events.addUserUnloaded(x => {
-      this.signInRedirect(location.path());
+    this.userManager.events.addSilentRenewError(
+      (error: Error) => {
+        if (!environment.production) {
+          console.error(`AuthenticationService: Silent Renew Error: ${error.stack}.`);
+        }
 
-      if (environment.production === false) {
-        console.log('addUserUnloaded');
+        this.removeUser();
       }
-    });
+    );
+
+    this.userManager.events.addUserSignedOut(
+      () => {
+        if (!environment.production) {
+          console.log('AuthenticationService: User Signed Out.');
+        }
+
+        this.removeUser();
+      }
+    );
   }
 
-  signInRedirect(redirectUrl: string) {
-    this.userManager.signinRedirect({ data: { redirectUrl: redirectUrl } });
+  isLoggedInObservable(): Observable<boolean> {
+    return from(this.userManager.getUser())
+      .pipe(
+        map(
+          (user) => {
+            if (user) {
+              return true;
+            } else {
+              return false;
+            }
+          }
+        )
+      );
   }
 
-  signinRedirectCallback() {
-    this.userManager.signinRedirectCallback()
-      .then((user: User) => {
-        this.router.navigateByUrl(user.state.redirectUrl);
-      })
-      .catch(function (err) {
-        console.log(err);
-      });
-  }
-
-  signinSilentCallback() {
-    this.userManager.signinSilentCallback();
-  }
-
-  isLoggedIn(): Observable<boolean> {
-    return this.getUser().pipe(
-      map(
+  getUser() {
+    this.userManager.getUser()
+      .then(
         (user: UserModel) => {
-          if (user) {
-            return true;
-          } else {
-            return false;
+          if (!this.environment.production) {
+            console.log('AuthenticationService: Got User.');
+          }
+
+          this.currentUser = user;
+          this.userLoadededEvent.emit(user);
+        }
+      ).catch(
+        (e) => {
+          console.log(e);
+        }
+      );
+  }
+
+  removeUser() {
+    this.userManager.removeUser()
+      .then(
+        () => {
+          if (!this.environment.production) {
+            console.log('AuthenticationService: Remove User.');
+          }
+
+          this.userLoadededEvent.emit(null);
+        }
+      ).catch(
+        (e) => {
+          console.log(e);
+        }
+      );
+  }
+
+  signInRedirect(returnUrl: string) {
+    this.userManager.signinRedirect({ data: { returnUrl: returnUrl } })
+      .then(
+        () => {
+          if (!this.environment.production) {
+            console.log('AuthenticationService: Sign In Redirect done.');
           }
         }
-      )
-    );
+      ).catch(
+        (e) => {
+          console.log(e);
+        }
+      );
   }
 
-  getUser(): Observable<UserModel> {
-    return from(this.userManager.getUser()).pipe(
-      map(user => user as UserModel)
-    );
+  signInRedirectCallback() {
+    this.userManager.signinRedirectCallback()
+      .then(
+        (user: UserModel) => {
+          if (!this.environment.production) {
+            console.log('AuthenticationService: Sign In Redirect Callback done.');
+          }
+
+          this.router.navigateByUrl(user.state.returnUrl);
+        }
+      ).catch(
+        (e) => {
+          console.log(e);
+        }
+      );
   }
 
-  private removeUser() {
-    this.userManager.removeUser();
+  signInSilent() {
+    this.userManager.signinSilent()
+      .then(
+        () => {
+          if (!this.environment.production) {
+            console.log('AuthenticationService: Sign In Silent done.');
+          }
+        }
+      ).catch(
+        (e) => {
+          console.log(e);
+        }
+      );
+  }
+
+  signInSilentCallback() {
+    this.userManager.signinSilentCallback()
+      .then(
+        () => {
+          if (!this.environment.production) {
+            console.log('AuthenticationService: Sign In Silent Callback done.');
+          }
+        }
+      ).catch(
+        (e) => {
+          console.log(e);
+        }
+      );
+  }
+
+  signOutRedirect() {
+    this.userManager.signoutRedirect()
+      .then(
+        () => {
+          if (!this.environment.production) {
+            console.log('AuthenticationService: Sign Out Redirect done.');
+          }
+        }
+      ).catch(
+        (e) => {
+          console.log(e);
+        }
+      );
+  }
+
+  signOutRedirectCallback() {
+    this.userManager.signoutRedirectCallback()
+      .then(
+        () => {
+          if (!this.environment.production) {
+            console.log('AuthenticationService: Sign Out Redirect Callback done.');
+          }
+        }
+      ).catch(
+        (e) => {
+          console.log(e);
+        }
+      );
   }
 
 }

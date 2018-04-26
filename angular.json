@@ -25,6 +25,21 @@
                 "glob": "**/*",
                 "input": "src/assets",
                 "output": "/assets"
+              },
+              {
+                "glob": "**/*",
+                "input": "src/scripts",
+                "output": "/"
+              },
+              {
+                "glob": "auth.html",
+                "input": "src",
+                "output": "/"
+              },
+              {
+                "glob": "silent-renew.html",
+                "input": "src",
+                "output": "/"
               }
             ],
             "styles": [

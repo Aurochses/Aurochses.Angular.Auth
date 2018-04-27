@@ -8,7 +8,7 @@ import { AuthenticationService, UserProfileModel } from '@aurochses/angular-auth
 })
 export class HomeComponent implements OnInit, OnDestroy {
 
-  private loadedUserSubscription: any;
+  loadedUserSubscription: any;
 
   userProfile: UserProfileModel;
 
@@ -18,7 +18,11 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.loadedUserSubscription = this.authenticationService.userLoadededEvent
       .subscribe(
         (user) => {
+          console.log('event');
+
           if (user) {
+            console.log('event 2');
+
             this.userProfile = user.profile;
           }
         }

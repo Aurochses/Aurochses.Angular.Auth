@@ -26,6 +26,33 @@ export class AuthenticationService {
   ) {
     this.userManager = new UserManager(authenticationSettings);
 
+    this.userManager.getUser()
+      .then(
+        (user) => {
+          if (user) {
+            if (!environment.production) {
+              console.log('AuthenticationService: User found.');
+            }
+
+            this.isLoggedIn = true;
+            this.currentUser = user;
+            this.userLoadededEvent.emit(user);
+          } else {
+            if (!environment.production) {
+              console.log('AuthenticationService: User not found.');
+            }
+
+            this.isLoggedIn = false;
+          }
+        }
+      ).catch(
+        (e) => {
+          this.isLoggedIn = false;
+
+          console.log(e);
+        }
+      );
+
     this.userManager.events.addUserLoaded(
       (user: UserModel) => {
         this.currentUser = user;

@@ -18,15 +18,13 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.loadedUserSubscription = this.authenticationService.userLoadededEvent
       .subscribe(
         (user) => {
-          console.log('event');
-
           if (user) {
-            console.log('event 2');
-
             this.userProfile = user.profile;
           }
         }
       );
+
+    this.authenticationService.getUser();
   }
 
   ngOnDestroy() {

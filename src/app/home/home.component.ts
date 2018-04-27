@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { AuthenticationService, UserProfileModel } from '@aurochses/angular-auth';
 
@@ -6,16 +6,14 @@ import { AuthenticationService, UserProfileModel } from '@aurochses/angular-auth
   selector: 'home',
   templateUrl: './home.component.html'
 })
-export class HomeComponent implements OnInit, OnDestroy {
-
-  loadedUserSubscription: any;
+export class HomeComponent implements OnInit {
 
   userProfile: UserProfileModel;
 
   constructor(private authenticationService: AuthenticationService) { }
 
   ngOnInit() {
-    this.loadedUserSubscription = this.authenticationService.userLoadededEvent
+    this.authenticationService.userLoadededEvent
       .subscribe(
         (user) => {
           if (user) {
@@ -25,12 +23,6 @@ export class HomeComponent implements OnInit, OnDestroy {
       );
 
     this.authenticationService.getUser();
-  }
-
-  ngOnDestroy() {
-    if (this.loadedUserSubscription.unsubscribe()) {
-      this.loadedUserSubscription.unsubscribe();
-    }
   }
 
 }

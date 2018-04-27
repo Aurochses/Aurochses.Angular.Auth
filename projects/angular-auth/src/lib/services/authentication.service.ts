@@ -26,37 +26,11 @@ export class AuthenticationService {
   ) {
     this.userManager = new UserManager(authenticationSettings);
 
-    this.userManager.getUser()
-      .then(
-        (user) => {
-          if (user) {
-            if (!environment.production) {
-              console.log('AuthenticationService: User found.');
-            }
-
-            this.isLoggedIn = true;
-            this.currentUser = user;
-            this.userLoadededEvent.emit(user);
-          } else {
-            if (!environment.production) {
-              console.log('AuthenticationService: User not found.');
-            }
-
-            this.isLoggedIn = false;
-          }
-        }
-      ).catch(
-        (e) => {
-          this.isLoggedIn = false;
-
-          console.log(e);
-        }
-      );
-
     this.userManager.events.addUserLoaded(
       (user: UserModel) => {
         this.currentUser = user;
         this.isLoggedIn = !(user === undefined);
+        this.userLoadededEvent.emit(user);
 
         if (!environment.production) {
           console.log('AuthenticationService: User Loaded.');
@@ -70,9 +44,8 @@ export class AuthenticationService {
           console.log('AuthenticationService: User Unloaded.');
         }
 
+        this.userLoadededEvent.emit(null);
         this.isLoggedIn = false;
-
-        this.signInRedirect(location.path());
       }
     );
 
@@ -133,13 +106,16 @@ export class AuthenticationService {
   getUser() {
     this.userManager.getUser()
       .then(
-        (user: UserModel) => {
-          if (!this.environment.production) {
-            console.log('AuthenticationService: Got User.');
+        (user) => {
+          if (user) {
+            if (!this.environment.production) {
+              console.log('AuthenticationService: User found.');
+            }
+          } else {
+            if (!this.environment.production) {
+              console.log('AuthenticationService: User not found.');
+            }
           }
-
-          this.currentUser = user;
-          this.userLoadededEvent.emit(user);
         }
       ).catch(
         (e) => {
@@ -155,8 +131,6 @@ export class AuthenticationService {
           if (!this.environment.production) {
             console.log('AuthenticationService: Remove User.');
           }
-
-          this.userLoadededEvent.emit(null);
         }
       ).catch(
         (e) => {
@@ -253,6 +227,27 @@ export class AuthenticationService {
       ).catch(
         (e) => {
           console.log(e);
+        }
+      );
+  }
+
+  trySilentSignIn(): Promise<boolean> {
+    return this.userManager.signinSilent()
+      .then(
+        () => {
+          if (!this.environment.production) {
+            console.log('AuthenticationService: Try Sign In Silent success.');
+          }
+
+          return true;
+        }
+      ).catch(
+        () => {
+          if (!this.environment.production) {
+            console.log('AuthenticationService: Try Sign In Silent failed.');
+          }
+
+          return false;
         }
       );
   }

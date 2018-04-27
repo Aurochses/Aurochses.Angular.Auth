@@ -22,7 +22,7 @@ export class HomeComponent implements OnInit {
         }
       );
 
-    this.authenticationService.getUser();
+    this.authenticationService.trySilentSignIn();
   }
 
 }

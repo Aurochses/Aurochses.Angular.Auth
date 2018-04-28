@@ -29,7 +29,7 @@ export class AuthenticationService {
     this.userManager.events.addUserLoaded(
       (user: UserModel) => {
         this.currentUser = user;
-        this.isLoggedIn = !(user === undefined);
+        this.isLoggedIn = !!user;
         this.userLoadededEvent.emit(user);
 
         if (!environment.production) {
@@ -111,10 +111,18 @@ export class AuthenticationService {
             if (!this.environment.production) {
               console.log('AuthenticationService: User found.');
             }
+
+            this.isLoggedIn = true;
+            this.currentUser = user;
+            this.userLoadededEvent.emit(user);
           } else {
             if (!this.environment.production) {
               console.log('AuthenticationService: User not found.');
             }
+
+            this.isLoggedIn = false;
+            this.currentUser = null;
+            this.userLoadededEvent.emit(null);
           }
         }
       ).catch(

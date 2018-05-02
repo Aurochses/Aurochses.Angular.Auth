@@ -2,14 +2,14 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 
-import { environment } from '../environments/environment';
-
 import {
   AuthenticationModule,
   AuthenticationService,
   AuthenticationGuard,
   AuthorizationGuard
 } from '@aurochses/angular-auth';
+
+import { environment } from '../environments/environment';
 
 import { AppRoutesModule } from './app-routes.module';
 import { AppComponent } from './app.component';

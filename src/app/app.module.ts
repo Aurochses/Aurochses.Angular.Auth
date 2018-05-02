@@ -2,12 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 
-import {
-  AuthenticationModule,
-  AuthenticationService,
-  AuthenticationGuard,
-  AuthorizationGuard
-} from '@aurochses/angular-auth';
+import { AuthenticationModule, AuthenticationService } from '@aurochses/angular-auth';
 
 import { environment } from '../environments/environment';
 
@@ -30,9 +25,7 @@ import { OtherComponent } from './other/other.component';
     AppRoutesModule
   ],
   providers: [
-    AuthenticationService,
-    AuthenticationGuard,
-    AuthorizationGuard
+    AuthenticationService
   ],
   bootstrap: [AppComponent]
 })

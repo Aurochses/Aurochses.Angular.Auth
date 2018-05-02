@@ -26,8 +26,8 @@ import { OtherComponent } from './other/other.component';
   imports: [
     BrowserModule,
     RouterModule,
-    AppRoutesModule,
-    AuthenticationModule.forRoot(environment, environment.authenticationSettings)
+    AuthenticationModule.forRoot(environment, environment.authenticationSettings),
+    AppRoutesModule
   ],
   providers: [
     AuthenticationService,

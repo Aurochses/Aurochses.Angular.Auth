@@ -50,6 +50,14 @@
             "scripts": []
           },
           "configurations": {
+            "test": {
+              "fileReplacements": [
+                {
+                  "src": "src/environments/environment.ts",
+                  "replaceWith": "src/environments/environment.test.ts"
+                }
+              ]
+            },
             "production": {
               "fileReplacements": [
                 {

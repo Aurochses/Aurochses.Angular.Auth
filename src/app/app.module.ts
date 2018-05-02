@@ -10,7 +10,6 @@ import {
   AuthenticationGuard,
   AuthorizationGuard
 } from '@aurochses/angular-auth';
-import { authenticationSettings } from '../environments/authentication-settings';
 
 import { AppRoutesModule } from './app-routes.module';
 import { AppComponent } from './app.component';
@@ -28,7 +27,7 @@ import { OtherComponent } from './other/other.component';
     BrowserModule,
     RouterModule,
     AppRoutesModule,
-    AuthenticationModule.forRoot(environment, authenticationSettings)
+    AuthenticationModule.forRoot(environment, environment.authenticationSettings)
   ],
   providers: [
     AuthenticationService,

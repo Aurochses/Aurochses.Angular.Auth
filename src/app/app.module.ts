@@ -8,24 +8,18 @@ import { environment } from '../environments/environment';
 
 import { AppRoutesModule } from './app-routes.module';
 import { AppComponent } from './app.component';
-
-import { HomeComponent } from './home/home.component';
-import { OtherComponent } from './other/other.component';
+import { MainModule } from './main/main.module';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    HomeComponent,
-    OtherComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,
     RouterModule,
     AuthenticationModule.forRoot(environment, environment.authenticationSettings),
-    AppRoutesModule
-  ],
-  providers: [
-    AuthenticationService
+    AppRoutesModule,
+    MainModule
   ],
   bootstrap: [AppComponent]
 })

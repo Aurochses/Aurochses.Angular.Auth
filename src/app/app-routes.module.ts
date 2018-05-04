@@ -3,8 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { AuthenticationGuard, AuthorizationGuard } from '@aurochses/angular-auth';
 
-import { HomeComponent } from './home/home.component';
-import { OtherComponent } from './other/other.component';
+import { HomeComponent } from './main/home/home.component';
+import { SecureComponent } from './main/secure/secure.component';
 
 const routes: Routes = [
     {
@@ -19,8 +19,8 @@ const routes: Routes = [
         }
     },
     {
-        path: 'other',
-        component: OtherComponent,
+        path: 'secure',
+        component: SecureComponent,
         canActivate: [
             AuthenticationGuard,
             AuthorizationGuard

@@ -9,14 +9,7 @@ import { SecureComponent } from './main/secure/secure.component';
 const routes: Routes = [
     {
         path: '',
-        component: HomeComponent,
-        canActivate: [
-            AuthenticationGuard,
-            AuthorizationGuard
-        ],
-        data: {
-
-        }
+        component: HomeComponent
     },
     {
         path: 'secure',

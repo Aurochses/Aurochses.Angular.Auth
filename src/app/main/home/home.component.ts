@@ -21,8 +21,9 @@ export class HomeComponent implements OnInit {
           }
         }
       );
-
-    this.authenticationService.trySilentSignIn();
   }
 
+  silentSignIn() {
+    this.authenticationService.trySilentSignIn();
+  }
 }

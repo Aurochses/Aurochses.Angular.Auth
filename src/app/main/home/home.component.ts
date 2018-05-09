@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthenticationService, UserProfileModel } from '@aurochses/angular-auth';
 
 @Component({
-  selector: 'home',
+  selector: 'app-home',
   templateUrl: './home.component.html'
 })
 export class HomeComponent implements OnInit {

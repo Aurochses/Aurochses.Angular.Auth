@@ -18,7 +18,10 @@ export class AuthorizationService {
 
             permissions.forEach(
                 permission => {
-                    if (!this.authenticationService.currentUser.profile.permission || !(this.authenticationService.currentUser.profile.permission.indexOf(permission) > -1)) {
+                    if (
+                        !this.authenticationService.currentUser.profile.permission
+                        || !(this.authenticationService.currentUser.profile.permission.indexOf(permission) > -1)
+                    ) {
                         flag = false;
                     }
                 }

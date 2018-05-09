@@ -161,7 +161,7 @@
     "angular-auth": {
       "root": "projects/angular-auth",
       "projectType": "library",
-      "prefix": "lib",
+      "prefix": "aur",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-ng-packagr:build",

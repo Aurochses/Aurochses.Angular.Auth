@@ -26,6 +26,33 @@ export class AuthenticationService {
   ) {
     this.userManager = new UserManager(authenticationSettings);
 
+    this.userManager.getUser()
+      .then(
+        (user) => {
+          if (user) {
+            if (!this.environment.production) {
+              console.log('AuthenticationService: constructor: User found.');
+            }
+
+            this.isLoggedIn = true;
+            this.currentUser = user;
+            this.userLoadededEvent.emit(user);
+          } else {
+            if (!this.environment.production) {
+              console.log('AuthenticationService: constructor: User not found.');
+            }
+
+            this.isLoggedIn = false;
+          }
+        }
+      ).catch(
+        (e) => {
+          this.isLoggedIn = false;
+
+          console.log(e);
+        }
+      );
+
     this.userManager.events.addUserLoaded(
       (user: UserModel) => {
         this.currentUser = user;
@@ -103,27 +130,16 @@ export class AuthenticationService {
       );
   }
 
-  getUser() {
+  loadUser() {
     this.userManager.getUser()
       .then(
         (user) => {
-          if (user) {
-            if (!this.environment.production) {
-              console.log('AuthenticationService: User found.');
-            }
-
-            this.isLoggedIn = true;
-            this.currentUser = user;
-            this.userLoadededEvent.emit(user);
-          } else {
-            if (!this.environment.production) {
-              console.log('AuthenticationService: User not found.');
-            }
-
-            this.isLoggedIn = false;
-            this.currentUser = null;
-            this.userLoadededEvent.emit(null);
+          if (!this.environment.production) {
+            console.log('AuthenticationService: loadUser.');
           }
+
+          this.currentUser = user;
+          this.userLoadededEvent.emit(user);
         }
       ).catch(
         (e) => {

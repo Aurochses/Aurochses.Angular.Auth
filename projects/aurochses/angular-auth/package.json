@@ -7,6 +7,6 @@
     "@angular/core": "^6.0.0",
     "@angular/router": "^6.0.0",
     "oidc-client": "1.4.1",
-    "rxjs": "6.0.0"
+    "rxjs": "^6.0.0"
   }
 }

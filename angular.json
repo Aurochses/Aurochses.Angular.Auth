@@ -173,5 +173,5 @@
       }
     }
   },
-  "defaultProject": "angular-auth"
+  "defaultProject": "@aurochses/angular-auth"
 }

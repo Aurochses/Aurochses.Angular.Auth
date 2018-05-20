@@ -1,27 +1,26 @@
-# Demo
+# Aurochses Angular Auth
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.0.0.
+Library to provide OpenID Connect (OIDC) and OAuth2 protocol support for client-side, browser-based Angular client applications. 
+Also included support for user session and access token management.
 
-## Development server
+## npm
+[![npm](https://img.shields.io/npm/v/@aurochses/angular-auth.svg)](https://www.npmjs.com/package/@aurochses/angular-auth)
+[![Dependency Status](https://david-dm.org/Aurochses/Aurochses.Angular.Auth.svg)](https://david-dm.org/Aurochses/Aurochses.Angular.Auth)
+[![devDependency Status](https://david-dm.org/Aurochses/Aurochses.Angular.Auth/dev-status.svg)](https://david-dm.org/Aurochses/Aurochses.Angular.Auth?type=dev)
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Web
 
-## Code scaffolding
+Type        | Web 
+------------|-----
+Test        | [web](http://auth.test.angular.aurochses.demo.by)
+Staging     | [web](http://auth.staging.angular.aurochses.demo.by)
+Production  | [web](http://auth.production.angular.aurochses.demo.by)
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Builds
 
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+Type            | Status 
+----------------|--------
+CI (develop)    | [![Visual Studio Team services](https://img.shields.io/vso/build/aurochses/ce77dc57-7f15-4037-90d9-c33247949dda/354.svg?style=flat-square)](https://aurochses.visualstudio.com/Aurochses.Angular/_build/index?definitionId=354)
+CI (pre-master) | [![Visual Studio Team services](https://img.shields.io/vso/build/aurochses/ce77dc57-7f15-4037-90d9-c33247949dda/355.svg?style=flat-square)](https://aurochses.visualstudio.com/Aurochses.Angular/_build/index?definitionId=355)
+PR (latest)     | [![Visual Studio Team services](https://img.shields.io/vso/build/aurochses/ce77dc57-7f15-4037-90d9-c33247949dda/356.svg?style=flat-square)](https://aurochses.visualstudio.com/Aurochses.Angular/_build/index?definitionId=356)
+CI (master)     | [![Visual Studio Team services](https://img.shields.io/vso/build/aurochses/ce77dc57-7f15-4037-90d9-c33247949dda/357.svg?style=flat-square)](https://aurochses.visualstudio.com/Aurochses.Angular/_build/index?definitionId=357)

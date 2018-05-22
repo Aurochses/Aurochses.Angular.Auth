@@ -1,3 +1,6 @@
+import { authenticationSettings } from '../environments/authentication-settings.prod';
+
 export const environment = {
-  production: true
+  production: true,
+  authenticationSettings: authenticationSettings
 };

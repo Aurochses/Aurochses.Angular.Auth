@@ -1,0 +1,17 @@
+<p>
+  home works!
+</p>
+
+<div *ngIf="userProfile">
+  <div>email: {{userProfile.email}}</div>
+  <div>name: {{userProfile.name}}</div>
+  <div>given name: {{userProfile.given_name}}</div>
+  <div>family name: {{userProfile.family_name}}</div>
+  <div>permission: {{userProfile.permission}}</div>    
+</div>
+
+<div *ngIf="!userProfile">
+  <button (click)="silentSignIn()">Silent Sign In</button>
+</div>
+
+<br /><a routerLink="/secure">Secure</a>

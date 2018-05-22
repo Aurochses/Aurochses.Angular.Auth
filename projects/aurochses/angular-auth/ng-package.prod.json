@@ -1,0 +1,7 @@
+{
+  "$schema": "../../../node_modules/ng-packagr/ng-package.schema.json",
+  "dest": "../../../dist/aurochses/angular-auth",
+  "lib": {
+    "entryFile": "src/public_api.ts"
+  }
+}

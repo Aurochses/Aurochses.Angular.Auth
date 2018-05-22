@@ -144,7 +144,7 @@
       "root": "projects/aurochses/angular-auth",
       "sourceRoot": "projects/aurochses/angular-auth/src",
       "projectType": "library",
-      "prefix": "aur",
+      "prefix": "lib",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-ng-packagr:build",

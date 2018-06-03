@@ -25,6 +25,7 @@
             "assets": [
               "src/favicon.ico",
               "src/assets",
+              "src/web.config",
               "src/scripts",
               "src/auth.html",
               "src/silent-renew.html"

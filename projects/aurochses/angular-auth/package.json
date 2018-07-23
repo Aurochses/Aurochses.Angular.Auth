@@ -3,10 +3,10 @@
   "version": "1.0.5",
   "author": "Aurochses",
   "peerDependencies": {
-    "@angular/common": "^6.0.0",
-    "@angular/core": "^6.0.0",
-    "@angular/router": "^6.0.0",
-    "oidc-client": "1.4.1",
-    "rxjs": "^6.0.0"
+    "@angular/common": "^6.0.9",
+    "@angular/core": "^6.0.9",
+    "@angular/router": "^6.0.9",
+    "oidc-client": "^1.5.2",
+    "rxjs": "^6.2.2"
   }
 }

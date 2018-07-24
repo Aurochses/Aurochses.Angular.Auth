@@ -5,12 +5,18 @@ if (Oidc && Oidc.Log && Oidc.Log.logger) {
     Oidc.Log.logger = console;
 }
 
+function showError(message) {
+    document.getElementById("spinner").style.display = "none";
+    document.getElementById("error").style.display = "block";
+    document.getElementById("errorMessage").innerText = message;
+    document.getElementById("errorUrl").innerText = window.location.origin;
+}
+
 new UserManager().signinRedirectCallback()
     .then(
         (user) => {
             if (user == null) {
-                document.getElementById("waiting").style.display = "none";
-                document.getElementById("error").innerText = "No sign-in request pending.";
+                showError("No sign-in request pending");
             }
             else {
                 if (user.state && user.state.returnUrl) {
@@ -23,7 +29,6 @@ new UserManager().signinRedirectCallback()
     )
     .catch(
         (e) => {
-            document.getElementById("waiting").style.display = "none";
-            document.getElementById("error").innerText = er.message;
+            showError(e.message);
         }
     );

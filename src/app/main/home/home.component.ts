@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { AuthenticationService, UserProfileModel } from '@aurochses/angular-auth';
 
@@ -10,7 +11,7 @@ export class HomeComponent implements OnInit {
 
   userProfile: UserProfileModel;
 
-  constructor(private authenticationService: AuthenticationService) { }
+  constructor(private router: Router, private authenticationService: AuthenticationService) { }
 
   ngOnInit() {
     this.authenticationService.userLoadededEvent
@@ -21,6 +22,10 @@ export class HomeComponent implements OnInit {
           }
         }
       );
+  }
+
+  signIn() {
+    this.authenticationService.signInRedirect(this.router.url);
   }
 
   silentSignIn() {

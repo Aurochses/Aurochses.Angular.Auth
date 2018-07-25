@@ -1,13 +1,147 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8" />
     <title></title>
+    <style type="text/css">
+        html,
+        body {
+            height: 100%;
+        }
+
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .spinner {
+            animation: rotator 1.4s linear infinite;
+        }
+
+        @keyframes rotator {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(270deg);
+            }
+        }
+
+        .path {
+            stroke-dasharray: 187;
+            stroke-dashoffset: 0;
+            transform-origin: center;
+            animation: dash 1.4s ease-in-out infinite, colors 5.6s ease-in-out infinite;
+        }
+
+        @keyframes colors {
+            0% {
+                stroke: #4285f4;
+            }
+            25% {
+                stroke: #de3e35;
+            }
+            50% {
+                stroke: #f7c223;
+            }
+            75% {
+                stroke: #1b9a59;
+            }
+            100% {
+                stroke: #4285f4;
+            }
+        }
+
+        @keyframes dash {
+            0% {
+                stroke-dashoffset: 187;
+            }
+            50% {
+                stroke-dashoffset: 46.75;
+                transform: rotate(135deg);
+            }
+            100% {
+                stroke-dashoffset: 187;
+                transform: rotate(450deg);
+            }
+        }
+
+        .error {
+            display: none;
+        }
+
+        .error .container {
+            display: flex;
+        }
+
+        .error .container .icon {
+            padding: 0 10px;
+        }
+
+        .error .container .icon svg {
+            fill: #de3e35;
+        }
+
+        .error .container .message {
+            font-size: 24px;
+        }
+    </style>
 </head>
+
 <body>
-    <h1 id="waiting">Waiting...</h1>
-    <div id="error"></div>
+    <svg id="spinner" class="spinner" xmlns="http://www.w3.org/2000/svg" width="65px" height="65px" viewBox="0 0 66 66">
+        <circle class="path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle>
+    </svg>
+
+    <div id="error" class="error">
+        <div class="container">
+            <div class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48">
+                    <path d="M2 42h44L24 4 2 42zm24-6h-4v-4h4v4zm0-8h-4v-8h4v8z" />
+                </svg>
+            </div>
+
+            <div>
+                <div id="errorMessage" class="message"></div>
+                <div>
+                    <a id="errorUrl" href="/"></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="scripts/oidc-client.min.js"></script>
-    <script src="scripts/auth.js"></script>
+    <script>
+        function showError(message) {
+            document.getElementById("spinner").style.display = "none";
+            document.getElementById("error").style.display = "block";
+            document.getElementById("errorMessage").innerText = message;
+            document.getElementById("errorUrl").innerText = window.location.origin;
+        }
+
+        new UserManager().signinRedirectCallback()
+            .then(
+                (user) => {
+                    if (user == null) {
+                        showError("No sign-in request pending");
+                    }
+                    else {
+                        if (user.state && user.state.returnUrl) {
+                            window.location = user.state.returnUrl;
+                        } else {
+                            window.location = '/';
+                        }
+                    }
+                }
+            )
+            .catch(
+                (e) => {
+                    showError(e.message);
+                }
+            );
+    </script>
 </body>
+
 </html>

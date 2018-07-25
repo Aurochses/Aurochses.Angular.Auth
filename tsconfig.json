@@ -18,7 +18,7 @@
     ],
     "paths": {
       "@aurochses/angular-auth": [
-        //"dist/angular-auth"
+        //"dist/aurochses/angular-auth"
         "projects/aurochses/angular-auth/src/public_api.ts"
       ]
     }

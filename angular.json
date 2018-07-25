@@ -25,6 +25,7 @@
             "assets": [
               "src/favicon.ico",
               "src/assets",
+              "src/web.config",
               "src/scripts",
               "src/auth.html",
               "src/silent-renew.html"
@@ -52,19 +53,19 @@
               "vendorChunk": false,
               "buildOptimizer": true
             },
-            "test": {
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.test.ts"
-                }
-              ]
-            },
             "staging": {
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
                   "with": "src/environments/environment.staging.ts"
+                }
+              ]
+            },
+            "test": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.test.ts"
                 }
               ]
             }
@@ -144,7 +145,7 @@
       "root": "projects/aurochses/angular-auth",
       "sourceRoot": "projects/aurochses/angular-auth/src",
       "projectType": "library",
-      "prefix": "aur",
+      "prefix": "lib",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-ng-packagr:build",

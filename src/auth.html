@@ -105,13 +105,43 @@
 
             <div>
                 <div id="errorMessage" class="message"></div>
-                <div><a id="errorUrl" href="/"></a></div>
+                <div>
+                    <a id="errorUrl" href="/"></a>
+                </div>
             </div>
         </div>
     </div>
 
     <script src="scripts/oidc-client.min.js"></script>
-    <script src="scripts/auth.js"></script>
+    <script>
+        function showError(message) {
+            document.getElementById("spinner").style.display = "none";
+            document.getElementById("error").style.display = "block";
+            document.getElementById("errorMessage").innerText = message;
+            document.getElementById("errorUrl").innerText = window.location.origin;
+        }
+
+        new UserManager().signinRedirectCallback()
+            .then(
+                (user) => {
+                    if (user == null) {
+                        showError("No sign-in request pending");
+                    }
+                    else {
+                        if (user.state && user.state.returnUrl) {
+                            window.location = user.state.returnUrl;
+                        } else {
+                            window.location = '/';
+                        }
+                    }
+                }
+            )
+            .catch(
+                (e) => {
+                    showError(e.message);
+                }
+            );
+    </script>
 </body>
 
 </html>

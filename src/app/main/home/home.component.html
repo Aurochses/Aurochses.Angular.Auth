@@ -11,6 +11,10 @@
 </div>
 
 <div *ngIf="!userProfile">
+  <button (click)="signIn()">Sign In</button>
+</div>
+
+<div *ngIf="!userProfile">
   <button (click)="silentSignIn()">Silent Sign In</button>
 </div>
 

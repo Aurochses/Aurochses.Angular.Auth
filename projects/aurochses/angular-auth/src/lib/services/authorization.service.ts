@@ -1,11 +1,7 @@
 import { Injectable } from '@angular/core';
 
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
-
 import { Environment } from '../models/environment.model';
 import { AuthenticationService } from './authentication.service';
-import { UserModel } from '../models/user.model';
 
 @Injectable()
 export class AuthorizationService {

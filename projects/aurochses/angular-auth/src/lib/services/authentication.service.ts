@@ -1,5 +1,4 @@
 import { Injectable, EventEmitter } from '@angular/core';
-import { Location } from '@angular/common';
 import { Router } from '@angular/router';
 
 import { UserManager } from 'oidc-client';
@@ -20,7 +19,6 @@ export class AuthenticationService {
 
   constructor(
     private router: Router,
-    location: Location,
     private environment: Environment,
     authenticationSettings: AuthenticationSettings
   ) {

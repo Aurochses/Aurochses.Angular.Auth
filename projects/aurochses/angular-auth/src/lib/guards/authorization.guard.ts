@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 
 import { Environment } from '../models/environment.model';
 import { AuthenticationSettings } from '../models/authentication-settings.model';

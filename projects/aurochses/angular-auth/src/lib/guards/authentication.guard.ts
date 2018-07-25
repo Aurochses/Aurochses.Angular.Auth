@@ -1,12 +1,10 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 
-import { User } from 'oidc-client';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { Environment } from '../models/environment.model';
-import { AuthenticationSettings } from '../models/authentication-settings.model';
 import { AuthenticationService } from '../services/authentication.service';
 
 @Injectable()
@@ -14,7 +12,6 @@ export class AuthenticationGuard implements CanActivate {
 
     constructor(
         private environment: Environment,
-        private authenticationSettings: AuthenticationSettings,
         private authenticationService: AuthenticationService
     ) { }
 

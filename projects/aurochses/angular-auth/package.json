@@ -1,6 +1,6 @@
 {
   "name": "@aurochses/angular-auth",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "author": "Aurochses",
   "peerDependencies": {
     "@angular/common": "^6.0.9",

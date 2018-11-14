@@ -1,13 +1,14 @@
-import {Injectable} from '@angular/core';
-import {CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot} from '@angular/router';
+import { Injectable } from '@angular/core';
+import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 
-import {Observable} from 'rxjs';
-import {map} from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
-import {Environment} from '../models/environment.model';
-import {AuthenticationSettings} from '../models/authentication-settings.model';
-import {AuthorizationService} from '../services/authorization.service';
+import { Environment } from '../models/environment.model';
+import { AuthenticationSettings } from '../models/authentication-settings.model';
+import { AuthorizationService } from '../services/authorization.service';
 import { UserManager } from 'oidc-client';
+
+import { UserModel } from '../models/user.model';
 
 @Injectable()
 export class AuthorizationGuard implements CanActivate {
@@ -22,8 +23,8 @@ export class AuthorizationGuard implements CanActivate {
 
   canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
     if (next.data && next.data.permissions) {
-      this.userManager.getUser().then(() => {
-        if (this.authorizationService.hasPermission(next.data.permissions)) {
+      this.userManager.getUser().then((user: UserModel) => {
+        if (this.authorizationService.hasPermission(user, next.data.permissions)) {
           if (!this.environment.production) {
             console.log(`AuthorizationGuard: User has permission.`);
           }

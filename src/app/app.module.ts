@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 
-import { AuthenticationModule, AuthenticationService } from '@aurochses/angular-auth';
+import { AuthenticationModule } from '@aurochses/angular-auth';
 
 import { environment } from '../environments/environment';
 

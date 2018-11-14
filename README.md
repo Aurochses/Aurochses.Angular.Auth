@@ -12,15 +12,14 @@ Also included support for user session and access token management.
 
 Type        | Web 
 ------------|-----
-Test        | [web](http://auth.test.angular.aurochses.demo.by)
-Staging     | [web](http://auth.staging.angular.aurochses.demo.by)
-Production  | [web](http://auth.production.angular.aurochses.demo.by)
+Test        | http://auth.test.angular.aurochses.demo.by
+Staging     | http://auth.staging.angular.aurochses.demo.by
+Production  | http://auth.production.angular.aurochses.demo.by
 
 ## Builds
 
-Type            | Status 
+Branch          | Status 
 ----------------|--------
-CI (develop)    | [![Visual Studio Team services](https://img.shields.io/vso/build/aurochses/ce77dc57-7f15-4037-90d9-c33247949dda/354.svg?style=flat-square)](https://aurochses.visualstudio.com/Aurochses.Angular/_build/index?definitionId=354)
-CI (pre-master) | [![Visual Studio Team services](https://img.shields.io/vso/build/aurochses/ce77dc57-7f15-4037-90d9-c33247949dda/355.svg?style=flat-square)](https://aurochses.visualstudio.com/Aurochses.Angular/_build/index?definitionId=355)
-PR (latest)     | [![Visual Studio Team services](https://img.shields.io/vso/build/aurochses/ce77dc57-7f15-4037-90d9-c33247949dda/356.svg?style=flat-square)](https://aurochses.visualstudio.com/Aurochses.Angular/_build/index?definitionId=356)
-CI (master)     | [![Visual Studio Team services](https://img.shields.io/vso/build/aurochses/ce77dc57-7f15-4037-90d9-c33247949dda/357.svg?style=flat-square)](https://aurochses.visualstudio.com/Aurochses.Angular/_build/index?definitionId=357)
+develop    | [![Build status](https://aurochses.visualstudio.com/Aurochses.GitHub/_apis/build/status/Aurochses.Angular.Auth_CI?branchName=develop)](https://aurochses.visualstudio.com/Aurochses.GitHub/_build/latest?definitionId=371)
+pre-master | [![Build status](https://aurochses.visualstudio.com/Aurochses.GitHub/_apis/build/status/Aurochses.Angular.Auth_CI?branchName=pre-master)](https://aurochses.visualstudio.com/Aurochses.GitHub/_build/latest?definitionId=371)
+master     | [![Build status](https://aurochses.visualstudio.com/Aurochses.GitHub/_apis/build/status/Aurochses.Angular.Auth_CI?branchName=master)](https://aurochses.visualstudio.com/Aurochses.GitHub/_build/latest?definitionId=371)
